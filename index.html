@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clima Laboral Kaizen Holdings 2026</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    :root {
+      --bg: #F7F9FA;
+      --surface: #FFFFFF;
+      --surface-soft: rgba(255,255,255,0.72);
+      --text: #0B2C3A;
+      --text-soft: #1F4658;
+      --muted: #5A5A5A;
+      --accent: #C46A4A;
+      --border: rgba(11, 44, 58, 0.08);
+      --shadow: 0 18px 45px rgba(11, 44, 58, 0.08);
+      --shadow-soft: 0 10px 28px rgba(11, 44, 58, 0.06);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --max-width: 1120px;
+      --transition: 280ms cubic-bezier(.2,.8,.2,1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(196, 106, 74, 0.06), transparent 28%),
+        linear-gradient(180deg, #F9FBFC 0%, var(--bg) 100%);
+      color: var(--text);
+    }
+
+    .page-shell {
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .page-shell::before,
+    .page-shell::after {
+      content: "";
+      position: fixed;
+      inset: auto;
+      border-radius: 999px;
+      pointer-events: none;
+      filter: blur(70px);
+      opacity: 0.55;
+      z-index: 0;
+    }
+
+    .page-shell::before {
+      width: 320px;
+      height: 320px;
+      top: -90px;
+      right: -60px;
+      background: rgba(196, 106, 74, 0.10);
+    }
+
+    .page-shell::after {
+      width: 300px;
+      height: 300px;
+      bottom: 8%;
+      left: -80px;
+      background: rgba(11, 44, 58, 0.08);
+    }
+
+    .header {
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(135deg, #0B2C3A 0%, #143C4C 100%);
+      padding: 42px 32px;
+      border-bottom-left-radius: 28px;
+      border-bottom-right-radius: 28px;
+      box-shadow: 0 18px 40px rgba(11, 44, 58, 0.20);
+    }
+
+    .header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    
+
+    .header-logo-wrap {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 140px;
+      align-self: center;
+    }
+
+    .header-logo {
+      display: block;
+      height: 110px;
+      width: auto;
+      max-width: 140px;
+      object-fit: contain;
+      opacity: 0.95;
+    }
+
+    .header-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.88);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .header h1 {
+      margin: 0;
+      color: #FFFFFF;
+      font-size: clamp(2rem, 3.4vw, 3rem);
+      line-height: 1.06;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .header h2 {
+      margin: 0;
+      color: rgba(255,255,255,0.82);
+      font-size: clamp(1rem, 1.7vw, 1.22rem);
+      font-weight: 400;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 34px 20px 64px;
+    }
+
+    .stack {
+      display: grid;
+      gap: 22px;
+    }
+
+    .panel,
+    .card,
+    .section-card {
+      background: var(--surface-soft);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .panel,
+    .section-card {
+      border-radius: var(--radius-xl);
+      padding: clamp(24px, 3vw, 34px);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 26px;
+      margin-bottom: 14px;
+      font-size: clamp(1.45rem, 2vw, 1.85rem);
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      background: #a9c1d3;
+      box-shadow: 0 0 0 6px rgba(196, 106, 74, 0.12);
+      flex: 0 0 auto;
+    }
+
+    .intro-title {
+      margin: 0 0 12px;
+      color: var(--text);
+      font-size: clamp(1.55rem, 2.1vw, 2rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .intro {
+      margin: 0;
+      max-width: 900px;
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--text-soft);
+    }
+
+    .intro + .intro {
+      margin-top: 16px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 6px;
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), rgba(196, 106, 74, 0.15));
+      opacity: 0.9;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+      border-color: rgba(11, 44, 58, 0.14);
+    }
+
+    .metric {
+      margin: 0;
+      font-size: clamp(2.3rem, 4.2vw, 3.2rem);
+      line-height: 1;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.04em;
+    }
+
+    .metric--highlight {
+      color: var(--accent);
+    }
+
+    .metric-label {
+      margin-top: 12px;
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .section-card p {
+      margin: 0;
+      color: var(--text-soft);
+      line-height: 1.75;
+      font-size: 16px;
+    }
+
+    .section-card p + p {
+      margin-top: 14px;
+    }
+
+    .chart-wrap {
+      margin-top: 22px;
+      padding: 18px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(11, 44, 58, 0.08);
+      border-radius: 18px;
+    }
+
+    .list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 14px;
+    }
+
+    .list li {
+      position: relative;
+      padding-left: 22px;
+      line-height: 1.7;
+      color: var(--text-soft);
+      font-size: 16px;
+    }
+
+    .list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #a9c1d3;
+      transform: translateY(-50%);
+      box-shadow: 0 0 0 5px rgba(169, 193, 211, 0.25);
+    }
+
+    .footer {
+      margin-top: 28px;
+      padding: 10px 4px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      letter-spacing: 0.02em;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 700ms ease, transform 700ms ease;
+      will-change: opacity, transform;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        padding: 30px 20px;
+        border-bottom-left-radius: 22px;
+        border-bottom-right-radius: 22px;
+      }
+
+      .header-inner {
+        align-items: center;
+        gap: 20px;
+      }
+
+      .header-logo-wrap {
+        min-width: 90px;
+      }
+
+      .header-logo {
+        height: 72px;
+        max-width: 90px;
+      }
+
+      .container {
+        padding: 24px 16px 48px;
+      }
+
+      .panel,
+      .section-card {
+        padding: 22px;
+        border-radius: 20px;
+      }
+
+      .chart-wrap {
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="header reveal">
+      <div class="header-inner">
+        <div class="header-copy">
+          <div class="eyebrow">Clima Laboral 2026</div>
+          <h1>Resultados de Clima Laboral 2026</h1>
+          <h2>Kaizen Holdings</h2>
+        </div>
+        <div class="header-logo-wrap">
+          <img src="ISO KH WHITE.BLUE.png" alt="Kaizen Holdings" class="header-logo" />
+        </div>
+      </div>
+    </header>
+
+    <main class="container stack">
+      <section class="panel reveal">
+        <h2 class="intro-title">¡Gracias por ser parte del cambio!</h2>
+
+        <p class="intro">
+          La transformación de Kaizen Holdings comienza con la voz de su equipo.
+          Agradecemos profundamente la participación en esta medición de Clima Laboral,
+          ya que la honestidad de cada colaborador es clave para construir un entorno
+          de trabajo cada vez más sólido y coherente con nuestros valores.
+        </p>
+
+        <p class="intro">
+          En esta primera medición, Kaizen Holdings alcanzó una participación del
+          <strong style="color:#C46A4A;">64%</strong>, consolidando la opinión de
+          <strong style="color:#C46A4A;">23 colaboradores</strong>.
+        </p>
+
+        <p class="intro">
+          Estos resultados nos permiten contar con una base representativa para comprender
+          el sentir general del equipo y avanzar en mejoras progresivas.
+        </p>
+      </section>
+
+      <section class="reveal">
+        <div class="section-title">Porcentajes de Participación</div>
+        <div class="grid">
+          <article class="card">
+            <p class="metric metric--highlight">86%</p>
+            <div class="metric-label">Participación global del grupo</div>
+          </article>
+          <article class="card">
+            <p class="metric">64%</p>
+            <div class="metric-label">Participación Kaizen Holdings</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="reveal">
+        <div class="section-title">Resultados por Categoría</div>
+        <div class="section-card">
+          <p>
+            El siguiente gráfico presenta los <strong>resultados globales de Kaizen Holdings</strong>
+            en las 14 dimensiones evaluadas, reflejando la percepción general del equipo.
+          </p>
+          <div class="chart-wrap">
+            <canvas id="graficoCategorias" height="420"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <section class="reveal">
+        <div class="section-title">Fortalezas</div>
+        <div class="section-card">
+          <ul class="list">
+            <li><strong>Relaciones y trabajo en equipo</strong> sólidos.</li>
+            <li><strong>Alta responsabilidad individual</strong> en las tareas asignadas.</li>
+            <li><strong>Orgullo por la organización</strong> y su rol estratégico dentro del grupo.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="reveal">
+        <div class="section-title">Pilares que Reforzaremos</div>
+        <div class="section-card">
+          <ul class="list">
+            <li><strong>Comunicación interna</strong> y claridad organizacional.</li>
+            <li><strong>Experiencia de liderazgo</strong> y acompañamiento.</li>
+            <li><strong>Equidad y consistencia</strong> en los procesos.</li>
+            <li><strong>Políticas y esquemas de flexibilidad</strong>.</li>
+            <li><strong>Reconocimiento</strong> al esfuerzo y aporte individual.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="reveal">
+        <div class="section-title">Nuestro Compromiso</div>
+        <div class="section-card">
+          <p>
+            Kaizen Holdings reconoce estos resultados y reafirma su compromiso con el bienestar,
+            el desarrollo y el crecimiento de su equipo.
+          </p>
+          <p>
+            A lo largo del año se trabajará en distintas fases para fortalecer estos pilares
+            y mejorar progresivamente la experiencia laboral.
+          </p>
+          <p>
+            Próximamente se estarán comunicando los avances y cambios que se implementarán.
+          </p>
+        </div>
+      </section>
+
+      <div class="footer reveal">Kaizen Holdings · Clima Laboral 2026</div>
+    </main>
+  </div>
+
+  <script>
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach((element) => {
+      revealObserver.observe(element);
+    });
+
+    new Chart(document.getElementById('graficoCategorias'), {
+      type: 'bar',
+      data: {
+        labels: [
+          'Relaciones y Equipo',
+          'Responsabilidad',
+          'Valoración Empresa',
+          'Apoyo Gerencial',
+          'Innovación',
+          'Autonomía',
+          'Comunicación Interna',
+          'Carga Laboral',
+          'Reconocimiento',
+          'Liderazgo',
+          'Valoración de Espacios',
+          'Políticas y Flexibilidad',
+          'Equidad',
+          'Valoración Salarial'
+        ],
+        datasets: [{
+          label: 'Resultado Global Kaizen Holdings (%)',
+          data: [94,90,88,74,64,62,55,70,54,48,61,42,46,96],
+          backgroundColor: '#0B2C3A',
+          hoverBackgroundColor: '#143C4C',
+          borderRadius: 8,
+          borderSkipped: false,
+          barThickness: 18
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: {
+          duration: 1100,
+          easing: 'easeOutCubic'
+        },
+        layout: {
+          padding: {
+            top: 8,
+            right: 10,
+            bottom: 8,
+            left: 6
+          }
+        },
+        scales: {
+          x: {
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 10,
+              color: '#5A5A5A'
+            },
+            grid: {
+              color: 'rgba(11, 44, 58, 0.08)',
+              drawBorder: false
+            },
+            border: {
+              display: false
+            }
+          },
+          y: {
+            ticks: {
+              color: '#1F4658',
+              font: {
+                size: 12
+              }
+            },
+            grid: {
+              display: false,
+              drawBorder: false
+            },
+            border: {
+              display: false
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: '#0B2C3A',
+            titleColor: '#FFFFFF',
+            bodyColor: '#FFFFFF',
+            padding: 12,
+            displayColors: false,
+            callbacks: {
+              label: (context) => `${context.raw}%`
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
